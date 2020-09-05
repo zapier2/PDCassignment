@@ -1,0 +1,14 @@
+What is my birthday?
+a) 2000
+b) 2001
+c) 1999
+d) 2002
+b
+HINT: A
+What is my height?
+a) 170cm
+b) 179cm
+c) 199cm
+d) 120cm
+a
+HINT: a
