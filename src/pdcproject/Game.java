@@ -28,19 +28,21 @@ public class Game {
     private boolean isOn;
     private Player player;
     private LifeLines lifelines;
-    
+    private Scoreboard playerScores;
 
     public Game() {
         questions = new ArrayList<>();
         loadQuestions();
         start();
+
     }
 
     private void start() {
-        
+
         isOn = true;
         Scanner scan = new Scanner(System.in);
-        player =  new Player();
+        playerScores = new Scoreboard();
+        player = new Player();
         lifelines = new LifeLines(questions);
         String answer;
         System.out.println("Welcome to Who Wants to be a Millionaire");
@@ -48,74 +50,76 @@ public class Game {
         player.setPlayerName(scan.nextLine());
         System.out.println("Press 'Y' to start or press anything to close the game");
         String start = scan.nextLine();
-        
+        Collections.shuffle(questions);
         if ("y".equalsIgnoreCase(start)) {
 
             // During wihle loop
             while (isOn != false) {
-                Collections.shuffle(questions);
 
                 for (int i = 0; i < questions.size(); ++i) {
-                    
-                    
-                    
                     System.out.println(questions.get(i));
                     System.out.println("-------------------");
                     System.out.println("Life Line Avaliable");
                     System.out.println("-------------------");
-                    
-                    if(lifelines.hintStatus() == false)
-                    {
+
+                    if (lifelines.hintStatus() == false) {
                         System.out.println("1 for Hint");
-                        
+
                     }
-                    
+
                     answer = scan.nextLine();
-                    
-                    if(answer.equalsIgnoreCase("1"))
-                    {
-                        
+
+                    if (answer.equalsIgnoreCase("1")) {
                         System.out.println(lifelines.getHintOn(i));
                         answer = scan.nextLine();
                     }
-                    
-                    if(answer.equalsIgnoreCase(questions.get(i).getCorrectAnswer())){
+
+                    if (answer.equalsIgnoreCase(questions.get(i).getCorrectAnswer())) {
                         System.out.println("Correct!");
                         player.setWinnings(winnings.get(i));
-                        System.out.println("You have won $" + player.getWinnings() +" do want to continue?");
-                        System.out.println("Enter n to exit, do any other input to continue");
-                        String input = scan.nextLine();
                         
-                        if(input.equalsIgnoreCase("n")) // ask if want to continue
-                        {
-                            System.out.println("Thanks for playing, You have won $" + player.getWinnings());
+                        if (i == questions.size() - 1) {
+                            System.out.println("Congratulations you are now a Millionair!!!");
+                            System.out.println("*Queue default fornite dance music*");
                             isOn = false;
                             break;
                         }
-                        else{
+                        
+                        System.out.println("You have won $" + player.getWinnings() + " do want to continue?");
+                        System.out.println("Enter n to exit, do any other input to continue");
+                        String input = scan.nextLine();
+
+                        if (input.equalsIgnoreCase("n")) { // ask if want to continue
+                            System.out.println("Thanks for playing, You have won $" + player.getWinnings());
+                            isOn = false;
+                            break;
+                        } else {
                             System.out.println("Next Question");
                         }
+
                         
-                    }
-                    else{
-                        if(i>5) // safe point for winnings
-                        {
-                        player.setWinnings(winnings.get(4));
+
+                    } else {
+                        if (i > 4) { // safe point for winnings
+
+                            player.setWinnings(winnings.get(4));
+
+                        } else {
+                            player.setWinnings(0);
                         }
+
                         System.out.println("Incorrect answer, Thanks for playing!");
                         System.out.println("You have won $" + player.getWinnings());
                         isOn = false;
                         break;
                     }
-                    
                 }
             }
-        }
-        else{
+        } else {
             System.out.println("Thank you for playing! ");
- 
+
         }
-        System.out.println("Good Luck next time "+player.getPlayerName()+".");
+        playerScores.writeScores(player);
         //After while loop
         // Thanks for playing, if they won or not, potential/what they want kidn of thing
     }
@@ -151,7 +155,7 @@ public class Game {
     }
 
     public static void main(String[] args) {
-        Game test = new Game();
+        Game game = new Game();
 
     }
 }
