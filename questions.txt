@@ -39,7 +39,7 @@ b) I3
 c) Prius
 d) Model 3  x
 d
-HINT: B
+HINT: d
 What year did windows 10 release?
 a) 2010
 b) 2016
@@ -89,13 +89,13 @@ c) George W. Bush
 d) Bill Clinton
 a
 HINT: a
-Who is United States current president?
-a) Donald Trump     x
-b) Barack Obama
-c) George W. Bush
-d) Bill Clinton
-a
-HINT: a
+How tall is Tyler1?
+a) 1.60m     
+b) 1.68m     x
+c) 1.59m
+d) 1.79m
+b
+HINT: b
 When did Studio Ghibli's Spirited Away Film release?
 a) 2002
 b) 2001     x
