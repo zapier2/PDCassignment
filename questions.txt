@@ -20,7 +20,7 @@ d) Auckland     x
 d
 HINT: D
 Who is the current prime ministers of New Zealand?
-a) Bill English
+a) Bill Ellise
 b) John Key    
 c) Jacinda Ardern   x
 d) Helen Clark
@@ -40,11 +40,11 @@ c) Prius
 d) Model 3  x
 d
 HINT: B
-How many stars are on the United States flag?
-a) 60
-b) 65
-c) 45
-d) 50  x
+What year did windows 10 release?
+a) 2010
+b) 2016
+c) 2012
+d) 2015  x
 d
 HINT: D
 How tall is the Sky Tower?
