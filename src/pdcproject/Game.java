@@ -27,7 +27,7 @@ public class Game {
     private ArrayList<Question> questions;
     private boolean isOn;
     private Player player;
-    private Lifelines lifelines;
+    private LifeLines lifelines;
     
 
     public Game() {
@@ -41,6 +41,7 @@ public class Game {
         isOn = true;
         Scanner scan = new Scanner(System.in);
         player =  new Player();
+        lifelines = new LifeLines(questions);
         String answer;
         System.out.println("Welcome to Who Wants to be a Millionaire");
         System.out.println("Enter player name: ");
@@ -63,17 +64,18 @@ public class Game {
                     System.out.println("Life Line Avaliable");
                     System.out.println("-------------------");
                     
-                    if(lifelines.getHintOn() == false)
+                    if(lifelines.hintStatus() == false)
                     {
                         System.out.println("1 for Hint");
+                        
                     }
                     
                     answer = scan.nextLine();
                     
                     if(answer.equalsIgnoreCase("1"))
                     {
-                        System.out.println(questions.get(i).getHint());
-                        lifelines.runHint(i);
+                        
+                        System.out.println(lifelines.getHintOn(i));
                         answer = scan.nextLine();
                     }
                     
