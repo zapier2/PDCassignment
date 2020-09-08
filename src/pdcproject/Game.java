@@ -27,6 +27,7 @@ public class Game {
     private ArrayList<Question> questions;
     private boolean isOn;
     private Player player;
+    private Lifelines lifelines;
     
 
     public Game() {
@@ -36,6 +37,7 @@ public class Game {
     }
 
     private void start() {
+        
         isOn = true;
         Scanner scan = new Scanner(System.in);
         player =  new Player();
@@ -54,16 +56,50 @@ public class Game {
 
                 for (int i = 0; i < questions.size(); ++i) {
                     
+                    
+                    
                     System.out.println(questions.get(i));
+                    System.out.println("-------------------");
+                    System.out.println("Life Line Avaliable");
+                    System.out.println("-------------------");
+                    
+                    if(lifelines.getHintOn() == false)
+                    {
+                        System.out.println("1 for Hint");
+                    }
+                    
                     answer = scan.nextLine();
+                    
+                    if(answer.equalsIgnoreCase("1"))
+                    {
+                        System.out.println(questions.get(i).getHint());
+                        lifelines.runHint(i);
+                        answer = scan.nextLine();
+                    }
                     
                     if(answer.equalsIgnoreCase(questions.get(i).getCorrectAnswer())){
                         System.out.println("Correct!");
                         player.setWinnings(winnings.get(i));
+                        System.out.println("You have won $" + player.getWinnings() +" do want to continue?");
+                        System.out.println("Enter n to exit, do any other input to continue");
+                        String input = scan.nextLine();
                         
+                        if(input.equalsIgnoreCase("n")) // ask if want to continue
+                        {
+                            System.out.println("Thanks for playing, You have won $" + player.getWinnings());
+                            isOn = false;
+                            break;
+                        }
+                        else{
+                            System.out.println("Next Question");
+                        }
                         
                     }
                     else{
+                        if(i>5) // safe point for winnings
+                        {
+                        player.setWinnings(winnings.get(4));
+                        }
                         System.out.println("Incorrect answer, Thanks for playing!");
                         System.out.println("You have won $" + player.getWinnings());
                         isOn = false;
@@ -74,9 +110,10 @@ public class Game {
             }
         }
         else{
-            System.out.println("Thank you for playing!");
+            System.out.println("Thank you for playing! ");
+ 
         }
-
+        System.out.println("Good Luck next time "+player.getPlayerName()+".");
         //After while loop
         // Thanks for playing, if they won or not, potential/what they want kidn of thing
     }
