@@ -26,6 +26,7 @@ public class Game {
             8000, 16000, 32000, 64000, 125000, 250000, 500000, 1000000);
     private ArrayList<Question> questions;
     private boolean isOn;
+    private Player player;
     
 
     public Game() {
@@ -37,9 +38,14 @@ public class Game {
     private void start() {
         isOn = true;
         Scanner scan = new Scanner(System.in);
+        player =  new Player();
+        String answer;
         System.out.println("Welcome to Who Wants to be a Millionaire");
+        System.out.println("Enter player name: ");
+        player.setPlayerName(scan.nextLine());
         System.out.println("Press 'Y' to start or press anything to close the game");
         String start = scan.nextLine();
+        
         if ("y".equalsIgnoreCase(start)) {
 
             // During wihle loop
@@ -47,7 +53,23 @@ public class Game {
                 Collections.shuffle(questions);
 
                 for (int i = 0; i < questions.size(); ++i) {
+                    
                     System.out.println(questions.get(i));
+                    answer = scan.nextLine();
+                    
+                    if(answer.equalsIgnoreCase(questions.get(i).getCorrectAnswer())){
+                        System.out.println("Correct!");
+                        player.setWinnings(winnings.get(i));
+                        
+                        
+                    }
+                    else{
+                        System.out.println("Incorrect answer, Thanks for playing!");
+                        System.out.println("You have won $" + player.getWinnings());
+                        isOn = false;
+                        break;
+                    }
+                    
                 }
             }
         }
