@@ -7,7 +7,7 @@ package pdcproject;
 
 /**
  *
- * @author gerar
+ * @author Gerad Gomez and Victor Feng
  */
 public class Lifelines {
     

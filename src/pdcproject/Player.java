@@ -7,7 +7,7 @@ package pdcproject;
 
 /**
  *
- * @author gerar
+ * @author Gerard Gomez
  */
 public class Player {
     
