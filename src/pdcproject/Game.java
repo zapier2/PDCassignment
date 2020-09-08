@@ -14,40 +14,57 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Scanner;
 
 /**
  *
  * @author gerar
  */
 public class Game {
+
     private final List<Integer> winnings = Arrays.asList(100, 200, 300, 500, 1000, 2000, 4000,
-    8000, 16000, 32000, 64000, 125000, 250000, 500000, 1000000);
+            8000, 16000, 32000, 64000, 125000, 250000, 500000, 1000000);
     private ArrayList<Question> questions;
     private boolean isOn;
     
+
     public Game() {
         questions = new ArrayList<>();
         loadQuestions();
-        System.out.println(questions.get(0));
-        System.out.println(questions.get(1));
         start();
     }
-    
+
     private void start() {
-        // During wihle loop
-        
+        isOn = true;
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Welcome to Who Wants to be a Millionaire");
+        System.out.println("Press 'Y' to start or press anything to close the game");
+        String start = scan.nextLine();
+        if ("y".equalsIgnoreCase(start)) {
+
+            // During wihle loop
+            while (isOn != false) {
+                Collections.shuffle(questions);
+
+                for (int i = 0; i < questions.size(); ++i) {
+                    System.out.println(questions.get(i));
+                }
+            }
+        }
+        else{
+            System.out.println("Thank you for playing!");
+        }
+
         //After while loop
         // Thanks for playing, if they won or not, potential/what they want kidn of thing
     }
-    
+
     private void loadQuestions() {
         BufferedReader readFile = null;
-        try 
-        {
+        try {
             readFile = new BufferedReader(new FileReader("questions.txt"));
             String readNext;
-            while((readNext = readFile.readLine()) != null)
-            {
+            while ((readNext = readFile.readLine()) != null) {
                 // Grabbing information for each question
                 String question = readNext;
                 String answerOne = readFile.readLine();
@@ -59,24 +76,21 @@ public class Game {
                 Question temp = new Question(question, answerOne, answerTwo, answerThree, answerFour, correctAnswer, hint);
                 this.questions.add(temp);
             }
-        }
-        catch (IOException ex)
-        {
+        } catch (IOException ex) {
             System.out.println("Can't read the file.");
-        }
-        finally
-        {
-            if(readFile != null)
+        } finally {
+            if (readFile != null) {
                 try {
                     readFile.close();
-            } catch (IOException ex) {
-                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }
-    
+
     public static void main(String[] args) {
         Game test = new Game();
-        
+
     }
 }
