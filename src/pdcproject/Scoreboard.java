@@ -24,9 +24,10 @@ public class Scoreboard {
         
         try{
             
-            nameAndScore = p.getPlayerName() +" $"+ p.getWinnings();
+            nameAndScore = "Player: " + p.getPlayerName() + " Winnings: $" + p.getWinnings() + "\n";
+            
           
-            bw = new BufferedWriter(new FileWriter("scores.txt"));
+            bw = new BufferedWriter(new FileWriter("scores.txt",true));
             
             bw.append(nameAndScore);
             bw.close();
@@ -34,6 +35,8 @@ public class Scoreboard {
             
         } catch(IOException ex){
             System.out.println("Error while saving scores.");
+        }finally{
+            System.out.println("Saving player: "+p.getPlayerName()+"'s Winnings: $" +p.getWinnings());
         }
     }
   

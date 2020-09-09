@@ -50,6 +50,7 @@ public class Game {
         player.setPlayerName(scan.nextLine());
         System.out.println("Press 'Y' to start or press anything to close the game");
         String start = scan.nextLine();
+        int hintCounter = 3;
         Collections.shuffle(questions);
         if ("y".equalsIgnoreCase(start)) {
 
@@ -63,13 +64,22 @@ public class Game {
                     System.out.println("-------------------");
 
                     if (lifelines.hintStatus() == false) {
-                        System.out.println("1 for Hint");
+                        System.out.println("1 for Hint (You have " + hintCounter + " left)");
+
+                    } else {
+                        System.out.println("You have no more hints left!");
+
+                    }
+
+                    if (hintCounter <= 1) {
+                        lifelines.setStatus(true);
 
                     }
 
                     answer = scan.nextLine();
 
                     if (answer.equalsIgnoreCase("1")) {
+                        hintCounter--;
                         System.out.println(lifelines.getHintOn(i));
                         answer = scan.nextLine();
                     }
@@ -77,14 +87,15 @@ public class Game {
                     if (answer.equalsIgnoreCase(questions.get(i).getCorrectAnswer())) {
                         System.out.println("Correct!");
                         player.setWinnings(winnings.get(i));
-                        
+
                         if (i == questions.size() - 1) {
                             System.out.println("Congratulations you are now a Millionair!!!");
                             System.out.println("*Queue default fornite dance music*");
+                            
                             isOn = false;
                             break;
                         }
-                        
+
                         System.out.println("You have won $" + player.getWinnings() + " do want to continue?");
                         System.out.println("Enter n to exit, do any other input to continue");
                         String input = scan.nextLine();
@@ -97,8 +108,6 @@ public class Game {
                             System.out.println("Next Question");
                         }
 
-                        
-
                     } else {
                         if (i > 4) { // safe point for winnings
 
@@ -110,16 +119,24 @@ public class Game {
 
                         System.out.println("Incorrect answer, Thanks for playing!");
                         System.out.println("You have won $" + player.getWinnings());
+                        System.out.println("Would you like to save you winnings? (Y) for yes or (N) for no");
+                        String input = scan.nextLine();
+
+                        if (input.equalsIgnoreCase("y")) {
+                            playerScores.writeScores(player);
+                        } else if (input.equalsIgnoreCase("n")) {
+                            System.out.println("Thanks for playing!");
+                        }
                         isOn = false;
                         break;
                     }
                 }
             }
         } else {
-            System.out.println("Thank you for playing! ");
+            System.out.println("See you next time! ");
 
         }
-        playerScores.writeScores(player);
+
         //After while loop
         // Thanks for playing, if they won or not, potential/what they want kidn of thing
     }

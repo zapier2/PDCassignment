@@ -21,11 +21,13 @@ public class LifeLines {
         
     }
     public String getHintOn(int questionNumber) {
-        hintOn = true;
         return questions.get(questionNumber).getHint();
         
     }
     
+    public void setStatus(boolean hintOn){
+        this.hintOn = hintOn;
+    }
     public boolean hintStatus() {
         return hintOn;
     }
