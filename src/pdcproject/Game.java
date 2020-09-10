@@ -34,10 +34,9 @@ public class Game {
     public Game() {
         questions = new ArrayList<>();
         loadQuestions();
-        start();
     }
 
-    private void start() {
+    public void start() {
 
         isOn = true;
         scan = new Scanner(System.in);
@@ -47,17 +46,14 @@ public class Game {
         String answer = "";
         String hint;
 
-        //  Input player name
-        System.out.println("Welcome to Who Wants to be a Millionaire");
+        // Input player name
         System.out.println("Enter player name: ");
         while (player.getPlayerName().isEmpty()) {
-
             player.setPlayerName(scan.nextLine());
 
             if (player.getPlayerName().isEmpty()) {
                 System.out.println("Error please enter a player name");
             }
-
         }
 
         System.out.println("Press 'Y' to start or press anything to close the game");
@@ -68,7 +64,7 @@ public class Game {
         Collections.shuffle(questions);
         if ("y".equalsIgnoreCase(start)) {
 
-            // During wihle loop
+            // While game is running
             while (isOn != false) {
 
                 for (int i = 0; i < questions.size(); ++i) {
@@ -82,15 +78,15 @@ public class Game {
 
                     if (lifelines.hintStatus() == false) { // Display the number of Hints currently avaliable
                         System.out.println("Press (1) for Hint (You have " + hintCounter + " left)");
-
                     } else {
                         System.out.println("You have no more hints left!");
                     }
-
+                    
+                    // Check if they have hints left
                     if (hintCounter < 2) {
                         lifelines.setStatus(true);
                     }
-                    //  Scan to check for answer input or Hint
+                    // Scan to check for answer input or Hint
 
                     boolean input = false;
                     while(input!=true)
@@ -104,9 +100,9 @@ public class Game {
                                 answer.equalsIgnoreCase("1")){
                             
                             if (answer.equalsIgnoreCase("1")) {//   when hint is used
-                            hintCounter--;
-                            System.out.println(lifelines.getHintOn(i));
-                            answer = scan.nextLine();
+                                hintCounter--;
+                                System.out.println(lifelines.getHintOn(i));
+                                answer = scan.nextLine();
                             }
                             
                             if (answer.equalsIgnoreCase(questions.get(i).getCorrectAnswer())) {  //  When answer is correct
@@ -144,9 +140,7 @@ public class Game {
                             } 
                             else {
                                 if (i > 4) { // safe point for winnings
-
                                     player.setWinnings(winnings.get(4));
-
                                 } else {
                                     player.setWinnings(0);
                                 }
@@ -203,7 +197,6 @@ public class Game {
     }
 
     public void saveWinnings(String save) {
-
         System.out.println("Would you like to save you winnings? (Y) for yes or (N) for no");
         save = scan.nextLine();
         if (save.equalsIgnoreCase("y")) {
@@ -214,6 +207,10 @@ public class Game {
     }
 
     public static void main(String[] args) {
+        System.out.println("----------------------------------------");
+        System.out.println("Welcome to Who Wants to be a Millionaire");        
+        System.out.println("----------------------------------------");
         Game game = new Game();
+        game.start();
     }
 }

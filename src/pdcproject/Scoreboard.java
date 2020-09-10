@@ -7,7 +7,6 @@ package pdcproject;
 
 
 import java.io.BufferedWriter;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -36,5 +35,4 @@ public class Scoreboard {
             System.out.println("Saving player: "+p.getPlayerName()+"'s Winnings: $" +p.getWinnings());
         }
     }
-  
 }

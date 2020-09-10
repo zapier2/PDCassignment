@@ -32,8 +32,8 @@ public class Player {
         return winnings;
     }
 
-    public void Player(String name, int money) {
-        this.winnings = money;
-        this.playerName = name;
+    public void Player(String playerName, int winnings) {
+        this.playerName = playerName;
+        this.winnings = winnings;
     }
 }
