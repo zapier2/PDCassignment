@@ -92,67 +92,84 @@ public class Game {
                     }
                     //  Scan to check for answer input or Hint
 
-                    hint = scan.nextLine();
-
-                    if (hint.equalsIgnoreCase("1")) {//   when hint is used
-                        hintCounter--;
-                        System.out.println(lifelines.getHintOn(i));
-                        hint = scan.nextLine();
-                    }
-
-                    if (hint.equalsIgnoreCase(questions.get(i).getCorrectAnswer())) {  //  When answer is correct
-
-                        System.out.println("Correct!");
-                        player.setWinnings(winnings.get(i));
-
-                        if (i == questions.size() - 1) {//  When winnings reached max
-                            System.out.println("Congratulations you are now a Millionair!!!");
-                            System.out.println("*Queue default fornite dance music*");
-                            saveWinnings(answer);
-                            isOn = false;
-                            break;
-                        }
-
-                        //  Display current winnings if answered questions correctly
-                        //  and ask if player wanted to continue
-                        System.out.println("You have won $" + player.getWinnings() + " do want to continue?");
-                        System.out.println("Enter n to exit, do any other input to continue");
+                    boolean input = false;
+                    while(input!=true)
+                    {
                         answer = scan.nextLine();
+                        
+                        if (answer.equalsIgnoreCase("a")||
+                                answer.equalsIgnoreCase("b")||
+                                answer.equalsIgnoreCase("c")||
+                                answer.equalsIgnoreCase("d")||
+                                answer.equalsIgnoreCase("1")){
+                            
+                            if (answer.equalsIgnoreCase("1")) {//   when hint is used
+                            hintCounter--;
+                            System.out.println(lifelines.getHintOn(i));
+                            answer = scan.nextLine();
+                            }
+                            
+                            if (answer.equalsIgnoreCase(questions.get(i).getCorrectAnswer())) {  //  When answer is correct
 
-                        if (answer.equalsIgnoreCase("n")) { // ask if want to continue
-                            System.out.println("You have won $" + player.getWinnings());
-                            saveWinnings(answer);
-                            isOn = false;
-                            break;
-                        } else {
-                            System.out.println("Next Question");
+                                System.out.println("Correct!");
+                                player.setWinnings(winnings.get(i));
+
+                                if (i == questions.size() - 1) {//  When winnings reached max
+                                    System.out.println("Congratulations you are now a Millionair!!!");
+                                    System.out.println("*Queue default fornite dance music*");
+                                    saveWinnings(answer);
+                                    isOn = false;
+                                    i = questions.size();
+                                    input = true;
+                                    break;
+                                }
+
+                                //  Display current winnings if answered questions correctly
+                                //  and ask if player wanted to continue
+                                System.out.println("You have won $" + player.getWinnings() + " do want to continue?");
+                                System.out.println("Enter n to exit, do any other input to continue");
+                                answer = scan.nextLine();
+
+                                if (answer.equalsIgnoreCase("n")) { // ask if want to continue
+                                    System.out.println("You have won $" + player.getWinnings());
+                                    saveWinnings(answer);
+                                    isOn = false;
+                                    i = questions.size();
+                                    input = true;
+                                } else {
+                                    System.out.println("Next Question");
+                                    input = true;
+                                }
+
+                            } 
+                            else {
+                                if (i > 4) { // safe point for winnings
+
+                                    player.setWinnings(winnings.get(4));
+
+                                } else {
+                                    player.setWinnings(0);
+                                }
+
+                                System.out.println("Incorrect answer, Thanks for playing!");
+                                System.out.println("You have won $" + player.getWinnings());
+                                saveWinnings(answer);
+
+                                isOn = false;
+                                i = questions.size();
+                                input = true;
+                            }
                         }
-
-                    } else {
-                        if (i > 4) { // safe point for winnings
-
-                            player.setWinnings(winnings.get(4));
-
-                        } else {
-                            player.setWinnings(0);
+                        else{
+                            System.out.println("Bad input please try again");
                         }
-
-                        System.out.println("Incorrect answer, Thanks for playing!");
-                        System.out.println("You have won $" + player.getWinnings());
-                        saveWinnings(answer);
-
-                        isOn = false;
-                        break;
                     }
                 }
             }
-        } else {
-            System.out.println("See you next time! ");
-
-        }
-
+         System.out.println("See you next time! ");
         //After while loop
         // Thanks for playing, if they won or not, potential/what they want kidn of thing
+        }
     }
 
     private void loadQuestions() {
