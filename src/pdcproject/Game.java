@@ -29,7 +29,7 @@ public class Game {
     private Player player;
     private LifeLines lifelines;
     private Scoreboard playerScores;
-
+    private Scanner scan;
     public Game() {
         questions = new ArrayList<>();
         loadQuestions();
@@ -40,11 +40,12 @@ public class Game {
     private void start() {
 
         isOn = true;
-        Scanner scan = new Scanner(System.in);
+        scan = new Scanner(System.in);
         playerScores = new Scoreboard();
         player = new Player();
         lifelines = new LifeLines(questions);
-        String answer;
+        String answer = "";
+        String hint;
         System.out.println("Welcome to Who Wants to be a Millionaire");
         System.out.println("Enter player name: ");
         player.setPlayerName(scan.nextLine());
@@ -76,38 +77,41 @@ public class Game {
 
                     }
 
-                    answer = scan.nextLine();
+                    hint = scan.nextLine();
 
-                    if (answer.equalsIgnoreCase("1")) {
+                    if (hint.equalsIgnoreCase("1")) {
                         hintCounter--;
                         System.out.println(lifelines.getHintOn(i));
-                        answer = scan.nextLine();
+                        hint = scan.nextLine();
                     }
 
-                    if (answer.equalsIgnoreCase(questions.get(i).getCorrectAnswer())) {
+                    if (hint.equalsIgnoreCase(questions.get(i).getCorrectAnswer())) {
                         System.out.println("Correct!");
                         player.setWinnings(winnings.get(i));
 
                         if (i == questions.size() - 1) {
                             System.out.println("Congratulations you are now a Millionair!!!");
                             System.out.println("*Queue default fornite dance music*");
-                            
+                            System.out.println("Would you like to save you winnings? (Y) for yes or (N) for no");
+                            answer = scan.nextLine();
+                            saveWinnings(answer);
                             isOn = false;
                             break;
                         }
 
                         System.out.println("You have won $" + player.getWinnings() + " do want to continue?");
                         System.out.println("Enter n to exit, do any other input to continue");
-                        String input = scan.nextLine();
+                        answer = scan.nextLine();
 
-                        if (input.equalsIgnoreCase("n")) { // ask if want to continue
-                            System.out.println("Thanks for playing, You have won $" + player.getWinnings());
+                        if (answer.equalsIgnoreCase("n")) { // ask if want to continue
+                            System.out.println("You have won $" + player.getWinnings());
+                            saveWinnings(answer);
                             isOn = false;
                             break;
                         } else {
                             System.out.println("Next Question");
                         }
-
+                       
                     } else {
                         if (i > 4) { // safe point for winnings
 
@@ -119,14 +123,8 @@ public class Game {
 
                         System.out.println("Incorrect answer, Thanks for playing!");
                         System.out.println("You have won $" + player.getWinnings());
-                        System.out.println("Would you like to save you winnings? (Y) for yes or (N) for no");
-                        String input = scan.nextLine();
-
-                        if (input.equalsIgnoreCase("y")) {
-                            playerScores.writeScores(player);
-                        } else if (input.equalsIgnoreCase("n")) {
-                            System.out.println("Thanks for playing!");
-                        }
+                       
+                        saveWinnings(answer);
                         isOn = false;
                         break;
                     }
@@ -168,6 +166,16 @@ public class Game {
                     Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+        }
+    }
+
+    public void saveWinnings(String save) {
+        System.out.println("Would you like to save you winnings? (Y) for yes or (N) for no");
+        save = scan.nextLine();
+        if (save.equalsIgnoreCase("y")) {
+            playerScores.writeScores(player);
+        } else if (save.equalsIgnoreCase("n")) {
+            System.out.println("Thanks for playing!");
         }
     }
 

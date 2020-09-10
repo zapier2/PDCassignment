@@ -1,0 +1,4 @@
+Player: a Winnings: $0
+Player: a Winnings: $100
+Player: a Winnings: $100
+Player: a Winnings: $0
