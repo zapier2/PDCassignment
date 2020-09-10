@@ -11,7 +11,7 @@ package pdcproject;
  */
 public class Player {
 
-
+    //  Store name and winnings
     public String playerName = "";
     private int winnings = 0;
 

@@ -13,16 +13,16 @@ import java.util.ArrayList;
  */
 public class LifeLines {
 
+    //  Boolean to check if hint is avaliable
     private boolean hintOn = false;
     private ArrayList<Question> questions;
 
     public LifeLines(ArrayList<Question> questions){
         this.questions = questions;
-        
     }
+    //  Return the hint
     public String getHintOn(int questionNumber) {
         return questions.get(questionNumber).getHint();
-        
     }
     
     public void setStatus(boolean hintOn){
