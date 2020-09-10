@@ -18,7 +18,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author gerar
+ * @author Gerard Gomez Victor Feng
  */
 public class Game {
 
@@ -46,10 +46,19 @@ public class Game {
         lifelines = new LifeLines(questions);
         String answer = "";
         String hint;
+
         //  Input player name
         System.out.println("Welcome to Who Wants to be a Millionaire");
         System.out.println("Enter player name: ");
-        player.setPlayerName(scan.nextLine());
+        while (player.getPlayerName().isEmpty()) {
+
+            player.setPlayerName(scan.nextLine());
+
+            if (player.getPlayerName().isEmpty()) {
+                System.out.println("Error please enter a player name");
+            }
+
+        }
 
         System.out.println("Press 'Y' to start or press anything to close the game");
         String start = scan.nextLine();
@@ -177,7 +186,7 @@ public class Game {
     }
 
     public void saveWinnings(String save) {
-        
+
         System.out.println("Would you like to save you winnings? (Y) for yes or (N) for no");
         save = scan.nextLine();
         if (save.equalsIgnoreCase("y")) {

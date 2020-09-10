@@ -9,7 +9,8 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Gerad Gomez and Victor Feng
+ * @author Gerard Gomez 
+ *         Victor Feng
  */
 public class LifeLines {
 

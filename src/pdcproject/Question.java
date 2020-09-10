@@ -10,7 +10,8 @@ import java.util.List;
 
 /**
  *
- * @author gerar
+ * @author Gerard Gomez 
+ *         Victor Feng
  */
 public class Question {
 
