@@ -13,8 +13,7 @@ import java.util.List;
  * @author gerar
  */
 public class Question {
-//    private final List<Integer> winnings = Arrays.asList(100, 200, 300, 500, 1000, 2000, 4000,
-//    8000, 16000, 32000, 64000, 125000, 250000, 500000, 1000000);
+
     private String question;
     private String answerOne;
     private String answerTwo;
@@ -23,6 +22,7 @@ public class Question {
     private String correctAnswer;
     private String hint;
     
+    // Sort each question separately
     public Question(String question, String answerOne, String answerTwo, String answerThree, String answerFour, String correctAnswer, String hint) {
         this.question = question;
         this.answerOne = answerOne;
@@ -63,6 +63,6 @@ public class Question {
     
     @Override
     public String toString() {
-        return "Question: " + this.question + "\n" + this.answerOne + "\n" + this.answerTwo + "\n" + this.answerThree + "\n" + this.answerFour;
+        return  this.question + "\n" + this.answerOne + "\n" + this.answerTwo + "\n" + this.answerThree + "\n" + this.answerFour;
     }
 }

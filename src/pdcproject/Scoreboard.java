@@ -18,20 +18,16 @@ import java.io.IOException;
 public class Scoreboard {
     private String nameAndScore;
     
-    
+    //  Takes in Player which have player name and winnings
     public void writeScores(Player p){
         BufferedWriter bw = null;
         
         try{
-            
             nameAndScore = "Player: " + p.getPlayerName() + " Winnings: $" + p.getWinnings() + "\n";
-            
           
             bw = new BufferedWriter(new FileWriter("scores.txt",true));
-            
             bw.append(nameAndScore);
             bw.close();
-            
             
         } catch(IOException ex){
             System.out.println("Error while saving scores.");
