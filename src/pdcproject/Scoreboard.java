@@ -13,7 +13,8 @@ import java.io.IOException;
 
 /**
  *
- * @author gerar
+ * @author Gerard Gomez 
+ *         Victor Feng
  */
 public class Scoreboard {
     private String nameAndScore;

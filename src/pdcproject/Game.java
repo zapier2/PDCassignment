@@ -30,6 +30,7 @@ public class Game {
     private LifeLines lifelines;
     private Scoreboard playerScores;
     private Scanner scan;
+
     public Game() {
         questions = new ArrayList<>();
         loadQuestions();
@@ -43,22 +44,16 @@ public class Game {
         playerScores = new Scoreboard();
         player = new Player();
         lifelines = new LifeLines(questions);
-<<<<<<< HEAD
         String answer = "";
         String hint;
-=======
-        String answer;
-        
         //  Input player name
->>>>>>> 37fbd4a3528558223ddec616081cab2043f9e8a8
         System.out.println("Welcome to Who Wants to be a Millionaire");
         System.out.println("Enter player name: ");
         player.setPlayerName(scan.nextLine());
-        
-        
+
         System.out.println("Press 'Y' to start or press anything to close the game");
         String start = scan.nextLine();
-        
+
         //  index for number of hints
         int hintCounter = 3;
         Collections.shuffle(questions);
@@ -69,7 +64,7 @@ public class Game {
 
                 for (int i = 0; i < questions.size(); ++i) {
                     //  Displaying the avaliable Hints
-                    System.out.print("Question "+(i+1)+") ");
+                    System.out.print("Question " + (i + 1) + ") ");
                     System.out.print(questions.get(i));
                     System.out.println("");
                     System.out.println("-------------------");
@@ -83,53 +78,37 @@ public class Game {
                         System.out.println("You have no more hints left!");
                     }
 
-                    if (hintCounter < 1) {
+                    if (hintCounter < 2) {
                         lifelines.setStatus(true);
                     }
                     //  Scan to check for answer input or Hint
-                    answer = scan.nextLine(); 
 
-<<<<<<< HEAD
                     hint = scan.nextLine();
 
-                    if (hint.equalsIgnoreCase("1")) {
-=======
-                    if (answer.equalsIgnoreCase("1")) {//   when hint is used
->>>>>>> 37fbd4a3528558223ddec616081cab2043f9e8a8
+                    if (hint.equalsIgnoreCase("1")) {//   when hint is used
                         hintCounter--;
                         System.out.println(lifelines.getHintOn(i));
                         hint = scan.nextLine();
                     }
-<<<<<<< HEAD
 
-                    if (hint.equalsIgnoreCase(questions.get(i).getCorrectAnswer())) {
-=======
-                    //  When answer is correct
-                    if (answer.equalsIgnoreCase(questions.get(i).getCorrectAnswer())) {
->>>>>>> 37fbd4a3528558223ddec616081cab2043f9e8a8
+                    if (hint.equalsIgnoreCase(questions.get(i).getCorrectAnswer())) {  //  When answer is correct
+
                         System.out.println("Correct!");
                         player.setWinnings(winnings.get(i));
 
                         if (i == questions.size() - 1) {//  When winnings reached max
                             System.out.println("Congratulations you are now a Millionair!!!");
                             System.out.println("*Queue default fornite dance music*");
-                            System.out.println("Would you like to save you winnings? (Y) for yes or (N) for no");
-                            answer = scan.nextLine();
                             saveWinnings(answer);
                             isOn = false;
                             break;
                         }
-                        
+
                         //  Display current winnings if answered questions correctly
                         //  and ask if player wanted to continue
                         System.out.println("You have won $" + player.getWinnings() + " do want to continue?");
-<<<<<<< HEAD
                         System.out.println("Enter n to exit, do any other input to continue");
                         answer = scan.nextLine();
-=======
-                        System.out.println("Enter (n) to exit, do any other input to continue");
-                        String input = scan.nextLine();
->>>>>>> 37fbd4a3528558223ddec616081cab2043f9e8a8
 
                         if (answer.equalsIgnoreCase("n")) { // ask if want to continue
                             System.out.println("You have won $" + player.getWinnings());
@@ -139,11 +118,7 @@ public class Game {
                         } else {
                             System.out.println("Next Question");
                         }
-<<<<<<< HEAD
-                       
-=======
-                        //  When answers is inccorect
->>>>>>> 37fbd4a3528558223ddec616081cab2043f9e8a8
+
                     } else {
                         if (i > 4) { // safe point for winnings
 
@@ -152,22 +127,11 @@ public class Game {
                         } else {
                             player.setWinnings(0);
                         }
-                        
+
                         System.out.println("Incorrect answer, Thanks for playing!");
                         System.out.println("You have won $" + player.getWinnings());
-<<<<<<< HEAD
-                       
                         saveWinnings(answer);
-=======
-                        System.out.println("Would you like to save you winnings? (Y) for yes or (N) for no");
-                        String input = scan.nextLine();
-                        // Ask if you want the score to be saved 
-                        if (input.equalsIgnoreCase("y")) {
-                            playerScores.writeScores(player);
-                        } else if (input.equalsIgnoreCase("n")) {
-                            System.out.println("Thanks for playing!");
-                        }
->>>>>>> 37fbd4a3528558223ddec616081cab2043f9e8a8
+
                         isOn = false;
                         break;
                     }
@@ -213,6 +177,7 @@ public class Game {
     }
 
     public void saveWinnings(String save) {
+        
         System.out.println("Would you like to save you winnings? (Y) for yes or (N) for no");
         save = scan.nextLine();
         if (save.equalsIgnoreCase("y")) {
